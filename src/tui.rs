@@ -86,12 +86,12 @@ impl Tui {
 	pub fn main_layout(frame: &Frame<'_>) -> Rc<[Rect]> {
 		Layout::default()
 			.constraints([
-				Constraint::Length(3),
-				Constraint::Fill(1),
-				Constraint::Length(3)
+				Constraint::Length(1),
+				Constraint::Fill(0),
+				Constraint::Length(1)
 			])
 			.horizontal_margin(2)
-			.vertical_margin(1)
+			.vertical_margin(0)
 			.split(frame.area())
 	}
 
@@ -103,14 +103,14 @@ impl Tui {
 				left: 2,
 				..Padding::default()
 			})
-			.borders(Borders::BOTTOM);
+			.borders(Borders::NONE);
 
 		let top_area = top_block.inner(main_area[0]);
 
 		let page_nums_text = format!("{} / {}", self.page + 1, self.rendered.len());
 
 		let top_layout = Layout::horizontal([
-			Constraint::Fill(1),
+			Constraint::Fill(0),
 			Constraint::Length(page_nums_text.len() as u16)
 		])
 		.split(top_area);
@@ -125,12 +125,12 @@ impl Tui {
 
 		let bottom_block = Block::new()
 			.padding(Padding {
-				top: 1,
+				top: 0,
 				right: 2,
 				left: 2,
 				bottom: 0
 			})
-			.borders(Borders::TOP);
+			.borders(Borders::NONE);
 		let bottom_area = bottom_block.inner(main_area[2]);
 
 		frame.render_widget(bottom_block, main_area[2]);
@@ -145,7 +145,7 @@ impl Tui {
 			String::new()
 		};
 		let bottom_layout = Layout::horizontal([
-			Constraint::Fill(1),
+			Constraint::Fill(0),
 			Constraint::Length(rendered_str.len() as u16)
 		])
 		.split(bottom_area);
